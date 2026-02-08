@@ -7,14 +7,14 @@
 <style>
 body {
   margin: 0;
-  background: #020712;
+  background: radial-gradient(circle at top, #041327, #000);
   color: #9fdcff;
   font-family: Orbitron, Arial, sans-serif;
   display: flex;
   height: 100vh;
 }
 
-/* ---------- LEFT : MISSILE ---------- */
+/* ================= LEFT : MISSILE ================= */
 .left {
   flex: 2;
   display: flex;
@@ -22,61 +22,103 @@ body {
   align-items: center;
 }
 
-.missile img {
-  height: 420px;
-  filter: drop-shadow(0 0 30px #00e5ff);
+.missile {
+  position: relative;
 }
 
-/* ---------- RIGHT : CONSOLE ---------- */
+.missile img {
+  width: 420px;
+  filter:
+    drop-shadow(0 0 25px #00e5ff)
+    brightness(1.2)
+    contrast(1.1)
+    hue-rotate(180deg);
+  opacity: 0.85;
+}
+
+/* scanlines hologram */
+.missile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,255,255,0.15),
+    rgba(0,255,255,0.15) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  pointer-events: none;
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  from { background-position: 0 0; }
+  to { background-position: 0 100px; }
+}
+
+/* ================= RIGHT ================= */
 .right {
   flex: 3;
   padding: 40px;
 }
 
-h2 {
-  letter-spacing: 2px;
-}
-
-/* ---------- WORLD MAP ---------- */
-.map-container {
+/* ================= WORLD MAP (GENERATED) ================= */
+.map {
   position: relative;
   width: 100%;
-  max-width: 700px;
+  max-width: 720px;
+  height: 360px;
   margin: 30px 0;
   border: 1px solid #00e5ff;
-  box-shadow: 0 0 25px rgba(0,229,255,0.3);
+  box-shadow: 0 0 30px rgba(0,229,255,.3);
+  overflow: hidden;
+
+  /* ocean */
+  background:
+    radial-gradient(circle at 30% 40%, #0b2a44 0%, transparent 45%),
+    radial-gradient(circle at 70% 45%, #0b2a44 0%, transparent 45%),
+    #020814;
 }
 
-.map-container img {
-  width: 100%;
-  display: block;
+/* continents fake glow */
+.map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 32% 42%, rgba(180,220,255,.25), transparent 18%),
+    radial-gradient(circle at 48% 35%, rgba(180,220,255,.25), transparent 14%),
+    radial-gradient(circle at 60% 38%, rgba(180,220,255,.25), transparent 16%),
+    radial-gradient(circle at 75% 45%, rgba(180,220,255,.25), transparent 14%),
+    radial-gradient(circle at 52% 65%, rgba(180,220,255,.25), transparent 18%);
+  filter: blur(6px);
 }
 
-/* ---------- TARGET DOTS ---------- */
+/* ================= TARGET DOTS ================= */
 .dot {
   position: absolute;
   width: 10px;
   height: 10px;
   background: red;
   border-radius: 50%;
-  animation: blink 1.2s infinite;
-  box-shadow: 0 0 10px red;
+  box-shadow: 0 0 12px red;
+  animation: blink 1.3s infinite;
 }
 
 @keyframes blink {
   0% { opacity: 1; }
-  50% { opacity: 0.2; }
+  50% { opacity: .2; }
   100% { opacity: 1; }
 }
 
-/* positions approx (cinéma, pas géopolitique 😄) */
-.dot.ny { top: 38%; left: 32%; }
-.dot.paris { top: 34%; left: 48%; }
-.dot.moscow { top: 28%; left: 58%; }
-.dot.tokyo { top: 36%; left: 78%; }
-.dot.sydney { top: 70%; left: 85%; }
+.ny { top: 40%; left: 30%; }
+.paris { top: 35%; left: 47%; }
+.moscow { top: 30%; left: 57%; }
+.tokyo { top: 38%; left: 78%; }
+.sydney { top: 70%; left: 85%; }
 
-/* ---------- CONTROLS ---------- */
+/* ================= CONTROLS ================= */
 input {
   margin-top: 20px;
   padding: 10px;
@@ -104,7 +146,8 @@ button {
 
 <div class="left">
   <div class="missile">
-    <img src="assets/missile.png" alt="Missile">
+    <!-- TON IMAGE MISSILE PNG -->
+    <img src="assets/missile.png" alt="Missile hologramme">
   </div>
 </div>
 
@@ -112,8 +155,7 @@ button {
   <h2>Console présidentielle — simulation</h2>
   <p>Autorité : Président de la République</p>
 
-  <div class="map-container">
-    <img src="assets/world.jpg" alt="Carte du monde">
+  <div class="map">
     <div class="dot ny"></div>
     <div class="dot paris"></div>
     <div class="dot moscow"></div>
