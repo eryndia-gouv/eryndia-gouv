@@ -1,243 +1,269 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- ================= META ================= -->
   <meta charset="UTF-8" />
+  <title>Autorité Stratégique — Interface Démonstration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ERYNDIA — Interface institutionnelle (fiction)</title>
 
-  <!-- ================= FONTS ================= -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- ================= STYLE ================= -->
+  <!-- STYLE GLOBAL -->
   <style>
-    /* -------- VARIABLES -------- */
-    :root{
-      --gold:#d4af37;
-      --dark:#040812;
-      --glass:rgba(10,20,40,.55);
+    :root {
+      --neon-blue: #00e5ff;
+      --neon-green: #00ff88;
+      --neon-red: #ff2e2e;
+      --dark: #02060b;
     }
 
-    /* -------- RESET -------- */
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:system-ui, Arial;
-      background:#000;
-      color:#fff;
-      overflow:hidden;
+    * {
+      box-sizing: border-box;
+      font-family: "Orbitron", Arial, sans-serif;
     }
 
-    /* -------- FOND TERRE -------- */
-    .background{
-      position:fixed;
-      inset:0;
-      background:url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1920&auto=format&fit=crop")
-      center/cover no-repeat;
-      filter:contrast(1.1) saturate(1.2);
-      z-index:-2;
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #05121f, var(--dark));
+      color: #e6f7ff;
+      overflow: hidden;
     }
 
-    /* Voile sombre */
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.65);
-      z-index:-1;
+    /* BACKGROUND EARTH (HOLOGRAM STYLE) */
+    .earth {
+      position: absolute;
+      inset: 0;
+      background: url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=2000&q=80")
+        center / cover no-repeat;
+      filter: hue-rotate(160deg) brightness(0.7);
+      opacity: 0.35;
+      animation: slowDrift 60s linear infinite;
     }
 
-    /* -------- POINTS ROUGES SYMBOLIQUES -------- */
-    .dot{
-      position:absolute;
-      width:6px;
-      height:6px;
-      background:red;
-      border-radius:50%;
-      opacity:.7;
-      box-shadow:0 0 8px red;
-      animation:pulse 3s infinite;
-    }
-    @keyframes pulse{
-      0%,100%{transform:scale(1)}
-      50%{transform:scale(1.6)}
+    @keyframes slowDrift {
+      from { transform: scale(1) translateX(0); }
+      to { transform: scale(1.05) translateX(-2%); }
     }
 
-    /* -------- ÉCRANS -------- */
-    .screen{
-      display:none;
-      min-height:100vh;
-      padding:4rem 1.5rem;
-      align-items:center;
-      justify-content:center;
-    }
-    .screen.active{display:flex}
-
-    /* -------- CARTE VERRE -------- */
-    .card{
-      background:var(--glass);
-      backdrop-filter:blur(12px);
-      border-radius:18px;
-      padding:2.5rem;
-      max-width:900px;
-      width:100%;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 20px 60px rgba(0,0,0,.6);
+    /* OVERLAY GRID */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.08) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.25;
     }
 
-    /* -------- TITRES -------- */
-    .title{
-      font-family:Cinzel,serif;
-      text-align:center;
-      letter-spacing:.18em;
-      margin-bottom:1.5rem;
-    }
-    .gold{color:var(--gold)}
-
-    /* -------- BOUTONS -------- */
-    .btn{
-      margin-top:1.5rem;
-      padding:1rem 1.4rem;
-      border-radius:14px;
-      background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.25);
-      color:#fff;
-      cursor:pointer;
-    }
-    .btn:hover{border-color:var(--gold)}
-
-    /* -------- CODE VISUEL -------- */
-    .code{
-      display:flex;
-      justify-content:center;
-      gap:.75rem;
-      margin-top:1.5rem;
-    }
-    .code input{
-      width:55px;
-      height:65px;
-      text-align:center;
-      font-size:1.5rem;
-      background:#0b1020;
-      border:1px solid rgba(255,255,255,.3);
-      color:#fff;
-      border-radius:10px;
+    /* HEADER */
+    header {
+      position: relative;
+      z-index: 2;
+      padding: 20px 30px;
+      border-bottom: 1px solid rgba(0,229,255,0.2);
     }
 
-    /* -------- GRILLE -------- */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:1.5rem;
-      margin-top:2rem;
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: var(--neon-blue);
     }
 
-    /* -------- LETTRE -------- */
-    .letter{
-      font-family:'Playfair Display',serif;
-      font-size:1.1rem;
-      line-height:1.8;
+    header span {
+      font-size: 12px;
+      opacity: 0.7;
     }
-    .signature{
-      margin-top:3rem;
-      text-align:right;
-      font-family:Cinzel,serif;
+
+    /* MAIN LAYOUT */
+    .container {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      height: calc(100vh - 80px);
+    }
+
+    /* LEFT PANEL */
+    .panel {
+      padding: 40px;
+    }
+
+    .panel h2 {
+      margin-top: 0;
+      font-size: 18px;
+      color: var(--neon-blue);
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid rgba(0,229,255,0.3);
+      background: rgba(0, 10, 20, 0.6);
+      font-size: 14px;
+    }
+
+    .points {
+      margin-top: 30px;
+      height: 220px;
+      position: relative;
+    }
+
+    .dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--neon-red);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* RIGHT PANEL */
+    .side {
+      border-left: 1px solid rgba(0,229,255,0.2);
+      padding: 30px;
+      background: rgba(0, 8, 16, 0.6);
+    }
+
+    .rocket {
+      height: 220px;
+      background: linear-gradient(
+        to top,
+        rgba(0,229,255,0.05),
+        rgba(0,229,255,0.25)
+      );
+      border: 1px solid rgba(0,229,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      text-align: center;
+      color: var(--neon-blue);
+      font-size: 14px;
+    }
+
+    .access {
+      margin-top: 10px;
+    }
+
+    .access input {
+      width: 100%;
+      padding: 10px;
+      background: #000;
+      border: 1px solid rgba(0,229,255,0.4);
+      color: #fff;
+      letter-spacing: 3px;
+      text-align: center;
+    }
+
+    .access button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid var(--neon-blue);
+      color: var(--neon-blue);
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+
+    .authorized {
+      color: var(--neon-green);
+    }
+
+    .refused {
+      color: var(--neon-red);
+      animation: blink 1s infinite;
+    }
+
+    /* FOOTER NOTICE */
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 11px;
+      opacity: 0.5;
+      z-index: 2;
     }
   </style>
 </head>
 
 <body>
+  <div class="earth"></div>
+  <div class="grid"></div>
 
-  <!-- ================= FOND ================= -->
-  <div class="background"></div>
-  <div class="overlay"></div>
+  <header>
+    <h1>AUTORITÉ STRATÉGIQUE — INTERFACE DE DÉMONSTRATION</h1>
+    <span>Mode simulation · Aucun système réel connecté</span>
+  </header>
 
-  <!-- Points rouges (symboliques) -->
-  <div class="dot" style="top:30%;left:40%"></div>
-  <div class="dot" style="top:50%;left:55%"></div>
-  <div class="dot" style="top:60%;left:30%"></div>
-  <div class="dot" style="top:42%;left:70%"></div>
+  <div class="container">
+    <!-- LEFT -->
+    <div class="panel">
+      <h2>Vue stratégique globale</h2>
 
-  <!-- ================= ÉCRAN 1 : ACCÈS ================= -->
-  <section id="login" class="screen active">
-    <div class="card">
-      <h1 class="title">AUTORITÉ SUPRÊME D’ERYNDIA</h1>
-      <p style="text-align:center;opacity:.85">
-        Interface institutionnelle — démonstration fictionnelle
-      </p>
-
-      <div class="code">
-        <input maxlength="1">
-        <input maxlength="1">
-        <input maxlength="1">
-        <input maxlength="1">
+      <div class="status">
+        Flux satellites : ACTIF<br />
+        Réseau sécurisé : STABLE<br />
+        Analyse mondiale : EN COURS
       </div>
 
-      <button class="btn" onclick="go('dashboard')">
-        Entrer dans l’interface
-      </button>
-    </div>
-  </section>
-
-  <!-- ================= ÉCRAN 2 : CENTRE ================= -->
-  <section id="dashboard" class="screen">
-    <div class="card">
-      <h2 class="title gold">CENTRE STRATÉGIQUE</h2>
-      <p style="text-align:center;opacity:.8">
-        Visualisation globale — simulation symbolique
-      </p>
-
-      <div class="grid">
-        <div class="card">
-          <h3 class="gold">Réseau mondial</h3>
-          <p>Points lumineux représentant une présence institutionnelle fictive.</p>
-        </div>
-
-        <div class="card">
-          <h3 class="gold">Lettre du Président</h3>
-          <p>Message protocolaire officiel.</p>
-          <button class="btn" onclick="go('letter')">Lire</button>
-        </div>
-
-        <div class="card">
-          <h3 class="gold">Archives sécurisées</h3>
-          <p>Documents institutionnels fictifs protégés.</p>
-        </div>
+      <div class="points">
+        <!-- POINTS ROUGES (POSITIONNEMENT ALÉATOIRE) -->
+        <div class="dot" style="top:30%;left:20%"></div>
+        <div class="dot" style="top:50%;left:40%"></div>
+        <div class="dot" style="top:65%;left:60%"></div>
+        <div class="dot" style="top:35%;left:70%"></div>
+        <div class="dot" style="top:45%;left:85%"></div>
+        <div class="dot" style="top:75%;left:25%"></div>
       </div>
     </div>
-  </section>
 
-  <!-- ================= ÉCRAN 3 : LETTRE ================= -->
-  <section id="letter" class="screen">
-    <div class="card">
-      <h2 class="title gold">Lettre du Président</h2>
-
-      <div class="letter">
-        <p>
-          En ce jour symbolique, je m’adresse avec solennité à celles et ceux
-          qui incarnent l’avenir, la responsabilité et l’unité.
-        </p>
-
-        <p>
-          Que chaque engagement soit guidé par la sagesse,
-          et chaque décision par l’intérêt supérieur de la Nation.
-        </p>
-
-        <div class="signature">
-          Le Président d’Eryndia
-        </div>
+    <!-- RIGHT -->
+    <div class="side">
+      <div class="rocket">
+        VECTEUR STRATÉGIQUE<br />
+        <small>Représentation holographique</small>
       </div>
 
-      <button class="btn" onclick="go('dashboard')">Retour</button>
-    </div>
-  </section>
+      <div class="access">
+        <input type="password" id="code" placeholder="ENTRER LE CODE" />
+        <button onclick="checkCode()">VALIDER L'ACCÈS</button>
 
-  <!-- ================= SCRIPT ================= -->
+        <div id="ok" class="result authorized">🟢 ACCÈS AUTORISÉ</div>
+        <div id="no" class="result refused">🔴 ACCÈS REFUSÉ</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © Interface fictive de démonstration — Cinéma / Simulation stratégique
+  </footer>
+
+  <!-- SCRIPT -->
   <script>
-    function go(id){
-      document.querySelectorAll('.screen')
-        .forEach(s=>s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    function checkCode() {
+      const value = document.getElementById("code").value;
+      document.getElementById("ok").style.display = "none";
+      document.getElementById("no").style.display = "none";
+
+      if (value === "7303") {
+        document.getElementById("ok").style.display = "block";
+      } else {
+        document.getElementById("no").style.display = "block";
+      }
     }
   </script>
-
 </body>
 </html>
+
