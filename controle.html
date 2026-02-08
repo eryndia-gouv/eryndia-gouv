@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Centre de contrôle</title>
 
+<style>
+body {
+  margin: 0;
+  background: #020712;
+  font-family: Orbitron, Arial, sans-serif;
+  color: #9fdcff;
+}
+
+.map {
+  height: 100vh;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg") center/contain no-repeat;
+  filter: drop-shadow(0 0 30px #00e5ff);
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: red;
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.header {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+
+.notice {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  opacity: 0.4;
+}
+</style>
+</head>
+
+<body>
+
+<div class="map">
+  <div class="header">
+    <h2>Interface stratégique — Simulation</h2>
+    <p>Réseau satellite : actif</p>
+  </div>
+
+  <!-- POINTS -->
+  <div class="dot" style="top:40%;left:55%"></div>
+  <div class="dot" style="top:48%;left:60%"></div>
+  <div class="dot" style="top:52%;left:30%"></div>
+  <div class="dot" style="top:65%;left:75%"></div>
+</div>
+
+<div class="notice">
+  Interface fictive — démonstration visuelle uniquement
+</div>
+
+</body>
+</html>
