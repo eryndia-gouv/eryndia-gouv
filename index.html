@@ -2,78 +2,63 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Accès sécurisé</title>
+<title>Accès Présidentiel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
   margin: 0;
-  background: radial-gradient(circle, #020b16, #000);
-  color: #9fdcff;
-  font-family: Orbitron, Arial, sans-serif;
-  overflow: hidden;
+  height: 100vh;
+  background: radial-gradient(circle at top, #0a1a2f, #000);
+  color: #c9e6ff;
+  font-family: "Times New Roman", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.earth {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") center/cover;
-  left: 50%;
-  top: 40%;
-  transform: translate(-50%, -50%);
-  animation: rotate 40s linear infinite;
-  box-shadow: 0 0 60px #00e5ff55;
-}
-
-@keyframes rotate {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-.satellite {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #00e5ff;
-  border-radius: 50%;
-  animation: orbit 12s linear infinite;
-}
-
-@keyframes orbit {
-  from { transform: rotate(0deg) translateX(300px); }
-  to { transform: rotate(360deg) translateX(300px); }
-}
-
-.panel {
-  position: absolute;
-  right: 10%;
-  top: 35%;
+.container {
+  border: 1px solid #1e3b5c;
+  padding: 60px;
   text-align: center;
+  box-shadow: 0 0 40px #0b2a44;
+  background: rgba(0,0,0,0.6);
+}
+
+h1 {
+  font-size: 26px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 40px;
 }
 
 input {
+  width: 260px;
   padding: 12px;
-  width: 220px;
+  background: #000;
+  border: 1px solid #3b6fa1;
+  color: #9fdcff;
+  font-size: 16px;
   text-align: center;
-  background: black;
-  border: 1px solid #00e5ff;
-  color: #00e5ff;
 }
 
 button {
-  margin-top: 10px;
-  padding: 12px;
-  width: 220px;
+  margin-top: 20px;
+  padding: 12px 30px;
   background: transparent;
-  border: 1px solid #00e5ff;
-  color: #00e5ff;
+  border: 1px solid #3b6fa1;
+  color: #9fdcff;
   cursor: pointer;
 }
 
 #msg {
-  margin-top: 12px;
+  margin-top: 20px;
+  font-size: 14px;
   display: none;
 }
 </style>
@@ -81,13 +66,14 @@ button {
 
 <body>
 
-<div class="earth"></div>
-<div class="satellite" style="top:40%; left:50%"></div>
+<div class="container">
+  <h1>PRÉSIDENCE — ACCÈS RESTREINT</h1>
+  <div class="subtitle">Autorité suprême requise</div>
 
-<div class="panel">
-  <h3>Entrez le code d’accès</h3>
-  <input type="password" id="code" placeholder="••••">
+  <input type="password" id="code" placeholder="Code présidentiel">
+  <br>
   <button onclick="check()">VALIDER</button>
+
   <div id="msg"></div>
 </div>
 
@@ -98,15 +84,15 @@ function check() {
 
   if (code === "7303") {
     msg.style.display = "block";
-    msg.style.color = "#00ff99";
-    msg.innerText = "ACCÈS AUTORISÉ";
+    msg.style.color = "#4cff9f";
+    msg.innerText = "Accès autorisé — bienvenue Monsieur le Président";
     setTimeout(() => {
-      window.location.href = "controle.html";
-    }, 1200);
+      window.location.href = "missile.html";
+    }, 1500);
   } else {
     msg.style.display = "block";
     msg.style.color = "red";
-    msg.innerText = "ACCÈS REFUSÉ";
+    msg.innerText = "Accès refusé — tentative enregistrée";
   }
 }
 </script>
