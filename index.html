@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- ================= META ================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ERYNDIA — Interface institutionnelle (fiction)</title>
+
+  <!-- ================= FONTS ================= -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- ================= STYLE ================= -->
+  <style>
+    /* -------- VARIABLES -------- */
+    :root{
+      --gold:#d4af37;
+      --dark:#040812;
+      --glass:rgba(10,20,40,.55);
+    }
+
+    /* -------- RESET -------- */
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:system-ui, Arial;
+      background:#000;
+      color:#fff;
+      overflow:hidden;
+    }
+
+    /* -------- FOND TERRE -------- */
+    .background{
+      position:fixed;
+      inset:0;
+      background:url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1920&auto=format&fit=crop")
+      center/cover no-repeat;
+      filter:contrast(1.1) saturate(1.2);
+      z-index:-2;
+    }
+
+    /* Voile sombre */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.65);
+      z-index:-1;
+    }
+
+    /* -------- POINTS ROUGES SYMBOLIQUES -------- */
+    .dot{
+      position:absolute;
+      width:6px;
+      height:6px;
+      background:red;
+      border-radius:50%;
+      opacity:.7;
+      box-shadow:0 0 8px red;
+      animation:pulse 3s infinite;
+    }
+    @keyframes pulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.6)}
+    }
+
+    /* -------- ÉCRANS -------- */
+    .screen{
+      display:none;
+      min-height:100vh;
+      padding:4rem 1.5rem;
+      align-items:center;
+      justify-content:center;
+    }
+    .screen.active{display:flex}
+
+    /* -------- CARTE VERRE -------- */
+    .card{
+      background:var(--glass);
+      backdrop-filter:blur(12px);
+      border-radius:18px;
+      padding:2.5rem;
+      max-width:900px;
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 20px 60px rgba(0,0,0,.6);
+    }
+
+    /* -------- TITRES -------- */
+    .title{
+      font-family:Cinzel,serif;
+      text-align:center;
+      letter-spacing:.18em;
+      margin-bottom:1.5rem;
+    }
+    .gold{color:var(--gold)}
+
+    /* -------- BOUTONS -------- */
+    .btn{
+      margin-top:1.5rem;
+      padding:1rem 1.4rem;
+      border-radius:14px;
+      background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.25);
+      color:#fff;
+      cursor:pointer;
+    }
+    .btn:hover{border-color:var(--gold)}
+
+    /* -------- CODE VISUEL -------- */
+    .code{
+      display:flex;
+      justify-content:center;
+      gap:.75rem;
+      margin-top:1.5rem;
+    }
+    .code input{
+      width:55px;
+      height:65px;
+      text-align:center;
+      font-size:1.5rem;
+      background:#0b1020;
+      border:1px solid rgba(255,255,255,.3);
+      color:#fff;
+      border-radius:10px;
+    }
+
+    /* -------- GRILLE -------- */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+
+    /* -------- LETTRE -------- */
+    .letter{
+      font-family:'Playfair Display',serif;
+      font-size:1.1rem;
+      line-height:1.8;
+    }
+    .signature{
+      margin-top:3rem;
+      text-align:right;
+      font-family:Cinzel,serif;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= FOND ================= -->
+  <div class="background"></div>
+  <div class="overlay"></div>
+
+  <!-- Points rouges (symboliques) -->
+  <div class="dot" style="top:30%;left:40%"></div>
+  <div class="dot" style="top:50%;left:55%"></div>
+  <div class="dot" style="top:60%;left:30%"></div>
+  <div class="dot" style="top:42%;left:70%"></div>
+
+  <!-- ================= ÉCRAN 1 : ACCÈS ================= -->
+  <section id="login" class="screen active">
+    <div class="card">
+      <h1 class="title">AUTORITÉ SUPRÊME D’ERYNDIA</h1>
+      <p style="text-align:center;opacity:.85">
+        Interface institutionnelle — démonstration fictionnelle
+      </p>
+
+      <div class="code">
+        <input maxlength="1">
+        <input maxlength="1">
+        <input maxlength="1">
+        <input maxlength="1">
+      </div>
+
+      <button class="btn" onclick="go('dashboard')">
+        Entrer dans l’interface
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= ÉCRAN 2 : CENTRE ================= -->
+  <section id="dashboard" class="screen">
+    <div class="card">
+      <h2 class="title gold">CENTRE STRATÉGIQUE</h2>
+      <p style="text-align:center;opacity:.8">
+        Visualisation globale — simulation symbolique
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3 class="gold">Réseau mondial</h3>
+          <p>Points lumineux représentant une présence institutionnelle fictive.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="gold">Lettre du Président</h3>
+          <p>Message protocolaire officiel.</p>
+          <button class="btn" onclick="go('letter')">Lire</button>
+        </div>
+
+        <div class="card">
+          <h3 class="gold">Archives sécurisées</h3>
+          <p>Documents institutionnels fictifs protégés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ÉCRAN 3 : LETTRE ================= -->
+  <section id="letter" class="screen">
+    <div class="card">
+      <h2 class="title gold">Lettre du Président</h2>
+
+      <div class="letter">
+        <p>
+          En ce jour symbolique, je m’adresse avec solennité à celles et ceux
+          qui incarnent l’avenir, la responsabilité et l’unité.
+        </p>
+
+        <p>
+          Que chaque engagement soit guidé par la sagesse,
+          et chaque décision par l’intérêt supérieur de la Nation.
+        </p>
+
+        <div class="signature">
+          Le Président d’Eryndia
+        </div>
+      </div>
+
+      <button class="btn" onclick="go('dashboard')">Retour</button>
+    </div>
+  </section>
+
+  <!-- ================= SCRIPT ================= -->
+  <script>
+    function go(id){
+      document.querySelectorAll('.screen')
+        .forEach(s=>s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
