@@ -7,14 +7,14 @@
 <style>
 body {
   margin: 0;
-  background: #03070d;
+  background: #020712;
   color: #cfefff;
   font-family: Orbitron, Arial, sans-serif;
   display: flex;
   height: 100vh;
 }
 
-/* ============ MISSILE ============ */
+/* ================= LEFT : MISSILE ================= */
 .left {
   flex: 2;
   display: flex;
@@ -23,29 +23,29 @@ body {
 }
 
 .missile {
-  opacity: 0.25;
+  position: relative;
+  opacity: 0.3;
   transition: opacity .6s, filter .6s;
 }
 
 .missile.active {
   opacity: 1;
-  filter: drop-shadow(0 0 40px #00e5ff);
+  filter: drop-shadow(0 0 45px #00e5ff);
 }
 
 .missile img {
   width: 420px;
 }
 
-/* hologram scan */
+/* hologram scanlines */
 .missile::after {
   content: "";
   position: absolute;
-  width: 420px;
-  height: 420px;
+  inset: 0;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0,255,255,.15),
-    rgba(0,255,255,.15) 2px,
+    rgba(0,255,255,.18),
+    rgba(0,255,255,.18) 2px,
     transparent 2px,
     transparent 6px
   );
@@ -58,47 +58,57 @@ body {
   to { background-position: 0 120px; }
 }
 
-/* ============ RIGHT ============ */
+/* ================= RIGHT : CONSOLE ================= */
 .right {
   flex: 3;
   padding: 40px;
 }
 
-/* ============ MAP ============ */
-.map {
-  width: 760px;
-  height: 380px;
-  background: #050d16;
-  border: 1px solid #1b4b66;
-  box-shadow: inset 0 0 60px rgba(0,200,255,.18);
+h2 {
+  letter-spacing: 2px;
+}
+
+/* ================= MAP ================= */
+.map-container {
+  position: relative;
+  width: 720px;
   margin: 25px 0;
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 30px rgba(0,229,255,.4);
 }
 
-/* continents */
-.land {
-  fill: #0c2a3f;
+.map-container img {
+  width: 100%;
+  display: block;
 }
 
-/* city lights */
-.lights {
-  fill: #bcdfff;
-  opacity: .25;
+/* ================= TARGET DOTS ================= */
+.dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  box-shadow: 0 0 12px red;
+  animation: blink 1.3s infinite;
 }
 
-/* targets */
-.target {
-  fill: red;
-  animation: pulse 1.4s infinite;
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: .2; }
+  100% { opacity: 1; }
 }
 
-@keyframes pulse {
-  0% { r: 3; opacity: 1; }
-  50% { r: 7; opacity: .25; }
-  100% { r: 3; opacity: 1; }
-}
+/* positions approx (ajuste si besoin selon TA map) */
+.ny { top: 38%; left: 30%; }
+.paris { top: 34%; left: 47%; }
+.moscow { top: 30%; left: 57%; }
+.tokyo { top: 38%; left: 78%; }
+.sydney { top: 72%; left: 85%; }
 
-/* ============ UI ============ */
+/* ================= CONTROLS ================= */
 input {
+  margin-top: 20px;
   padding: 10px;
   background: black;
   border: 1px solid #00e5ff;
@@ -106,8 +116,8 @@ input {
 }
 
 button {
-  margin-top: 12px;
-  padding: 10px 22px;
+  margin-top: 15px;
+  padding: 10px 20px;
   background: transparent;
   border: 1px solid #00e5ff;
   color: #00e5ff;
@@ -115,7 +125,7 @@ button {
 }
 
 #status {
-  margin-top: 18px;
+  margin-top: 20px;
   font-weight: bold;
 }
 </style>
@@ -123,41 +133,29 @@ button {
 
 <body>
 
+<!-- ================= MISSILE ================= -->
 <div class="left">
   <div class="missile" id="missile">
-    <img src="assets/missile.png">
+    <img src="assets/missile.png" alt="Missile hologramme">
   </div>
 </div>
 
+<!-- ================= CONSOLE ================= -->
 <div class="right">
   <h2>Console présidentielle — Commandement stratégique</h2>
-  <p>Autorisation requise : Chef de l’État</p>
+  <p>Autorité : Chef de l’État</p>
 
-  <!-- ========== WORLD MAP SVG ========== -->
-  <svg class="map" viewBox="0 0 760 380">
+  <!-- MAP -->
+  <div class="map-container">
+    <img src="assets/world.png" alt="Carte du monde satellite">
+    <div class="dot ny"></div>
+    <div class="dot paris"></div>
+    <div class="dot moscow"></div>
+    <div class="dot tokyo"></div>
+    <div class="dot sydney"></div>
+  </div>
 
-    <!-- Continents -->
-    <path class="land" d="M60 150 L140 120 L200 150 L170 200 L100 210 Z"/>
-    <path class="land" d="M250 120 L330 100 L390 130 L360 180 L280 170 Z"/>
-    <path class="land" d="M400 130 L520 120 L600 150 L560 200 L460 190 Z"/>
-    <path class="land" d="M520 230 L580 250 L550 310 L500 280 Z"/>
-
-    <!-- city glow -->
-    <circle class="lights" cx="140" cy="160" r="18"/>
-    <circle class="lights" cx="320" cy="140" r="14"/>
-    <circle class="lights" cx="480" cy="150" r="16"/>
-    <circle class="lights" cx="600" cy="170" r="14"/>
-    <circle class="lights" cx="540" cy="290" r="12"/>
-
-    <!-- targets -->
-    <circle class="target" cx="140" cy="160"/>
-    <circle class="target" cx="320" cy="140"/>
-    <circle class="target" cx="480" cy="150"/>
-    <circle class="target" cx="600" cy="170"/>
-    <circle class="target" cx="540" cy="290"/>
-
-  </svg>
-
+  <!-- CONTROLS -->
   <input type="text" id="launchCode" placeholder="Code symbolique">
   <br>
   <button onclick="validate()">Valider</button>
@@ -167,6 +165,7 @@ button {
 
 <script>
 function speak(text) {
+  if (!('speechSynthesis' in window)) return;
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = "fr-FR";
   msg.rate = 0.85;
@@ -176,8 +175,8 @@ function speak(text) {
 
 function validate() {
   const code = document.getElementById("launchCode").value;
-  const status = document.getElementById("status");
   const missile = document.getElementById("missile");
+  const status = document.getElementById("status");
 
   if (code === "CA03B") {
     missile.classList.add("active");
