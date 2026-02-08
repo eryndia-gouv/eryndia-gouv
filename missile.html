@@ -7,8 +7,8 @@
 <style>
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #041327, #000);
-  color: #9fdcff;
+  background: #050b14;
+  color: #cfefff;
   font-family: Orbitron, Arial, sans-serif;
   display: flex;
   height: 100vh;
@@ -24,37 +24,41 @@ body {
 
 .missile {
   position: relative;
+  opacity: 0.35;
+  transition: opacity 0.6s;
+}
+
+.missile.active {
+  opacity: 1;
 }
 
 .missile img {
   width: 420px;
   filter:
-    drop-shadow(0 0 25px #00e5ff)
-    brightness(1.2)
-    contrast(1.1)
-    hue-rotate(180deg);
-  opacity: 0.85;
+    drop-shadow(0 0 35px #00e5ff)
+    hue-rotate(180deg)
+    brightness(1.3);
 }
 
-/* scanlines hologram */
+/* hologram scan */
 .missile::after {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0,255,255,0.15),
-    rgba(0,255,255,0.15) 2px,
+    rgba(0,255,255,0.18),
+    rgba(0,255,255,0.18) 2px,
     transparent 2px,
     transparent 6px
   );
+  animation: scan 1.6s linear infinite;
   pointer-events: none;
-  animation: scan 2s linear infinite;
 }
 
 @keyframes scan {
   from { background-position: 0 0; }
-  to { background-position: 0 100px; }
+  to { background-position: 0 120px; }
 }
 
 /* ================= RIGHT ================= */
@@ -63,64 +67,29 @@ body {
   padding: 40px;
 }
 
-/* ================= WORLD MAP (GENERATED) ================= */
+/* ================= MAP ================= */
 .map {
-  position: relative;
-  width: 100%;
-  max-width: 720px;
+  width: 720px;
   height: 360px;
-  margin: 30px 0;
-  border: 1px solid #00e5ff;
-  box-shadow: 0 0 30px rgba(0,229,255,.3);
-  overflow: hidden;
-
-  /* ocean */
-  background:
-    radial-gradient(circle at 30% 40%, #0b2a44 0%, transparent 45%),
-    radial-gradient(circle at 70% 45%, #0b2a44 0%, transparent 45%),
-    #020814;
+  border: 1px solid #1b4b66;
+  box-shadow: inset 0 0 40px rgba(0,200,255,.15);
+  margin: 25px 0;
 }
 
-/* continents fake glow */
-.map::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 32% 42%, rgba(180,220,255,.25), transparent 18%),
-    radial-gradient(circle at 48% 35%, rgba(180,220,255,.25), transparent 14%),
-    radial-gradient(circle at 60% 38%, rgba(180,220,255,.25), transparent 16%),
-    radial-gradient(circle at 75% 45%, rgba(180,220,255,.25), transparent 14%),
-    radial-gradient(circle at 52% 65%, rgba(180,220,255,.25), transparent 18%);
-  filter: blur(6px);
-}
-
-/* ================= TARGET DOTS ================= */
+/* dots */
 .dot {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: red;
-  border-radius: 50%;
-  box-shadow: 0 0 12px red;
-  animation: blink 1.3s infinite;
+  fill: red;
+  animation: pulse 1.4s infinite;
 }
 
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: .2; }
-  100% { opacity: 1; }
+@keyframes pulse {
+  0% { opacity: 1; r: 3; }
+  50% { opacity: .3; r: 6; }
+  100% { opacity: 1; r: 3; }
 }
-
-.ny { top: 40%; left: 30%; }
-.paris { top: 35%; left: 47%; }
-.moscow { top: 30%; left: 57%; }
-.tokyo { top: 38%; left: 78%; }
-.sydney { top: 70%; left: 85%; }
 
 /* ================= CONTROLS ================= */
 input {
-  margin-top: 20px;
   padding: 10px;
   background: black;
   border: 1px solid #00e5ff;
@@ -128,8 +97,8 @@ input {
 }
 
 button {
-  margin-top: 15px;
-  padding: 10px 20px;
+  margin-top: 12px;
+  padding: 10px 22px;
   background: transparent;
   border: 1px solid #00e5ff;
   color: #00e5ff;
@@ -137,7 +106,8 @@ button {
 }
 
 #status {
-  margin-top: 20px;
+  margin-top: 18px;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -145,23 +115,33 @@ button {
 <body>
 
 <div class="left">
-  <div class="missile">
-    <!-- TON IMAGE MISSILE PNG -->
+  <div class="missile" id="missile">
     <img src="assets/missile.png" alt="Missile hologramme">
   </div>
 </div>
 
 <div class="right">
-  <h2>Console présidentielle — simulation</h2>
-  <p>Autorité : Président de la République</p>
+  <h2>Console présidentielle — système stratégique</h2>
+  <p>Niveau d’autorisation : Chef de l’État</p>
 
-  <div class="map">
-    <div class="dot ny"></div>
-    <div class="dot paris"></div>
-    <div class="dot moscow"></div>
-    <div class="dot tokyo"></div>
-    <div class="dot sydney"></div>
-  </div>
+  <!-- ===== MAP SVG (GENERATED) ===== -->
+  <svg class="map" viewBox="0 0 720 360">
+    <!-- ocean -->
+    <rect width="720" height="360" fill="#06131f"/>
+
+    <!-- continents (stylisés, crédibles) -->
+    <path d="M80 140 L130 110 L170 120 L190 160 L160 190 L120 180 Z" fill="#0e2f44"/>
+    <path d="M300 120 L360 100 L410 120 L390 170 L330 160 Z" fill="#0e2f44"/>
+    <path d="M420 130 L520 120 L570 150 L540 190 L460 180 Z" fill="#0e2f44"/>
+    <path d="M520 230 L570 240 L550 280 L500 260 Z" fill="#0e2f44"/>
+
+    <!-- targets -->
+    <circle class="dot" cx="140" cy="150"/>
+    <circle class="dot" cx="350" cy="135"/>
+    <circle class="dot" cx="470" cy="150"/>
+    <circle class="dot" cx="560" cy="170"/>
+    <circle class="dot" cx="540" cy="260"/>
+  </svg>
 
   <input type="text" id="launchCode" placeholder="Code symbolique">
   <br>
@@ -174,16 +154,22 @@ button {
 function validate() {
   const code = document.getElementById("launchCode").value;
   const status = document.getElementById("status");
+  const missile = document.getElementById("missile");
 
   if (code === "CA03B") {
     status.style.color = "#4cff9f";
-    status.innerText = "Code reconnu — séquence fictive validée";
+    status.innerText = "Code reconnu — système armé";
+    missile.classList.add("active");
   } else {
     status.style.color = "red";
-    status.innerText = "Code invalide";
+    status.innerText = "Accès refusé";
+    missile.classList.remove("active");
   }
 }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
