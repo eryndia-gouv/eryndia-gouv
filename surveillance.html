@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>World Surveillance Grid</title>
+
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle at center, #061c2f, #02070c);
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #cfefff;
+  overflow: hidden;
+}
+
+/* HEADER */
+.header {
+  height: 55px;
+  background: linear-gradient(to right, #071e30, #02070c);
+  border-bottom: 1px solid #1f4d66;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+}
+
+.header h1 {
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.header span {
+  margin-left: auto;
+  font-size: 11px;
+  color: #4cff9f;
+}
+
+/* LAYOUT */
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  height: calc(100vh - 55px);
+}
+
+/* MAP */
+.map {
+  position: relative;
+  background:
+    linear-gradient(transparent 95%, rgba(0,229,255,.15) 96%),
+    linear-gradient(90deg, transparent 95%, rgba(0,229,255,.15) 96%);
+  background-size: 80px 80px;
+  border-right: 1px solid #1f4d66;
+}
+
+/* WORLD OUTLINE (FAKE MAP GRID) */
+.map::before {
+  content: "WORLD SURVEILLANCE GRID";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  opacity: .6;
+}
+
+/* TARGET DOTS */
+.dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  box-shadow: 0 0 15px red;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .2; }
+}
+
+/* FEEDS */
+.feeds {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.feed {
+  border: 1px solid #1f4d66;
+  background: rgba(5,15,25,.95);
+  padding: 10px;
+}
+
+.feed h3 {
+  margin: 0 0 5px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+iframe {
+  width: 100%;
+  height: 160px;
+  border: none;
+}
+
+/* FOOTER */
+.footer {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  font-size: 11px;
+  color: red;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>WORLD SURVEILLANCE MODULE</h1>
+  <span>GLOBAL MONITORING ACTIVE</span>
+</div>
+
+<div class="container">
+
+  <!-- MAP -->
+  <div class="map">
+    <!-- FAKE TARGETS -->
+    <div class="dot" style="top:30%; left:40%;"></div>
+    <div class="dot" style="top:55%; left:60%;"></div>
+    <div class="dot" style="top:45%; left:25%;"></div>
+    <div class="dot" style="top:65%; left:75%;"></div>
+  </div>
+
+  <!-- FEEDS -->
+  <div class="feeds">
+
+    <div class="feed">
+      <h3>SATELLITE FEED — ISS (PUBLIC)</h3>
+      <iframe src="https://www.youtube.com/embed/86YLFOog4GM"></iframe>
+    </div>
+
+    <div class="feed">
+      <h3>EARTH OBSERVATION — NASA</h3>
+      <iframe src="https://www.youtube.com/embed/21X5lGlDOfg"></iframe>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">CLASSIFIED</div>
+
+</body>
+</html>
