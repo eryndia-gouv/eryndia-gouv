@@ -102,7 +102,7 @@ function login() {
   const pwd = document.getElementById("password").value;
   const status = document.getElementById("status");
 
-  if (pwd === "PRESIDENT-ACCESS") {
+  if (pwd === "7303") {
     status.style.color = "#4cff9f";
     status.innerText = "ACCESS GRANTED — EXECUTIVE AUTHORITY CONFIRMED";
 
@@ -111,7 +111,7 @@ function login() {
     }, 1200);
 
     // Étape suivante plus tard
-    // window.location.href = "dashboard.html";
+    window.location.href = "dashboard.html";
   } else {
     status.style.color = "red";
     status.innerText = "ACCESS DENIED";
