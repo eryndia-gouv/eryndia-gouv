@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>GOVERNMENT SECURE ACCESS</title>
+
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #0a1624, #000);
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #cfefff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== CONTAINER ===== */
+.panel {
+  width: 420px;
+  padding: 40px;
+  border: 1px solid #1f4d66;
+  background: rgba(5,15,25,.95);
+  box-shadow: 0 0 60px rgba(0,200,255,.25);
+}
+
+/* ===== TEXT ===== */
+h1 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.sub {
+  font-size: 12px;
+  opacity: .7;
+  margin-bottom: 30px;
+}
+
+/* ===== INPUT ===== */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: black;
+  border: 1px solid #00e5ff;
+  color: #00e5ff;
+  font-size: 14px;
+}
+
+/* ===== BUTTON ===== */
+button {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #00e5ff;
+  color: #00e5ff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(0,229,255,.1);
+}
+
+/* ===== STATUS ===== */
+#status {
+  margin-top: 20px;
+  font-size: 13px;
+  height: 20px;
+}
+
+/* ===== CLASSIFIED LABEL ===== */
+.classified {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  font-size: 11px;
+  color: red;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+  <h1>EXECUTIVE ACCESS TERMINAL</h1>
+  <div class="sub">AUTHORIZED PERSONNEL ONLY</div>
+
+  <input type="password" id="password" placeholder="Presidential Access Code">
+  <button onclick="login()">AUTHENTICATE</button>
+
+  <div id="status"></div>
+</div>
+
+<div class="classified">CLASSIFIED</div>
+
+<script>
+function login() {
+  const pwd = document.getElementById("password").value;
+  const status = document.getElementById("status");
+
+  if (pwd === "PRESIDENT-ACCESS") {
+    status.style.color = "#4cff9f";
+    status.innerText = "ACCESS GRANTED — EXECUTIVE AUTHORITY CONFIRMED";
+
+    setTimeout(() => {
+      status.innerText = "Loading Government Interface…";
+    }, 1200);
+
+    // Étape suivante plus tard
+    // window.location.href = "dashboard.html";
+  } else {
+    status.style.color = "red";
+    status.innerText = "ACCESS DENIED";
+  }
+}
+</script>
+
+</body>
+</html>
