@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>EXECUTIVE COMMAND</title>
+<style>
+body{
+  margin:0;
+  background:#02070c;
+  font-family:Segoe UI,Arial,sans-serif;
+  color:#cfefff;
+}
+.header{
+  height:60px;
+  background:linear-gradient(to right,#071e30,#02070c);
+  border-bottom:1px solid #1f4d66;
+  display:flex;
+  align-items:center;
+  padding:0 30px;
+}
+.header h1{letter-spacing:3px;font-size:15px;}
+.main{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  padding:40px;
+}
+.panel{
+  border:1px solid #1f4d66;
+  padding:30px;
+  background:rgba(5,15,25,.95);
+}
+.panel h2{
+  margin-top:0;
+  font-size:14px;
+  letter-spacing:2px;
+}
+button{
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  background:transparent;
+  border:1px solid #00e5ff;
+  color:#00e5ff;
+  cursor:pointer;
+}
+button:hover{background:rgba(0,229,255,.15);}
+.serbere{
+  border:2px solid red;
+  color:red;
+  font-weight:bold;
+}
+</style>
+</head>
+<body>
 
+<div class="header">
+  <h1>TOP SECRET — EXECUTIVE COMMAND INTERFACE</h1>
+</div>
+
+<div class="main">
+
+  <div class="panel">
+    <h2>WORLD SURVEILLANCE</h2>
+    <button>GLOBAL MAP</button>
+    <button>SATELLITE FEEDS</button>
+    <button>REGIONAL CAMERAS</button>
+  </div>
+
+  <div class="panel">
+    <h2>AGENCIES STATUS</h2>
+    <p>CIA — ONLINE</p>
+    <p>FBI — ONLINE</p>
+    <p>NSA — ONLINE</p>
+    <p>DEA — ONLINE</p>
+  </div>
+
+  <div class="panel">
+    <h2>STRATEGIC SYSTEMS</h2>
+    <button class="serbere" onclick="goSERBERE()">ACCÉDER À SERBERE</button>
+  </div>
+
+</div>
+
+<script>
+function goSERBERE(){
+  window.location.href="serbere.html";
+}
+</script>
+
+</body>
+</html>
