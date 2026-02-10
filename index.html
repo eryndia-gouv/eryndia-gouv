@@ -2,119 +2,67 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>GOVERNMENT SECURE ACCESS</title>
-
+<title>SECURE NUCLEAR ACCESS</title>
 <style>
-body {
-  margin: 0;
-  background: radial-gradient(circle at top, #0a1624, #000);
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: #cfefff;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body{
+  margin:0;
+  background:radial-gradient(circle,#06192a,#000);
+  font-family:Segoe UI,Arial,sans-serif;
+  color:#cfefff;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-
-/* ===== CONTAINER ===== */
-.panel {
-  width: 420px;
-  padding: 40px;
-  border: 1px solid #1f4d66;
-  background: rgba(5,15,25,.95);
-  box-shadow: 0 0 60px rgba(0,200,255,.25);
+.box{
+  border:1px solid #1f4d66;
+  padding:50px;
+  background:rgba(5,15,25,.95);
+  box-shadow:0 0 80px rgba(0,229,255,.25);
+  text-align:center;
 }
-
-/* ===== TEXT ===== */
-h1 {
-  margin: 0 0 10px;
-  font-size: 18px;
-  letter-spacing: 2px;
+h1{
+  letter-spacing:3px;
+  font-size:18px;
+  margin-bottom:30px;
 }
-
-.sub {
-  font-size: 12px;
-  opacity: .7;
-  margin-bottom: 30px;
+input{
+  width:280px;
+  padding:14px;
+  background:black;
+  border:1px solid #00e5ff;
+  color:#00e5ff;
+  font-size:16px;
+  text-align:center;
 }
-
-/* ===== INPUT ===== */
-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  background: black;
-  border: 1px solid #00e5ff;
-  color: #00e5ff;
-  font-size: 14px;
+button{
+  margin-top:25px;
+  padding:12px 30px;
+  background:transparent;
+  border:1px solid #00e5ff;
+  color:#00e5ff;
+  cursor:pointer;
 }
-
-/* ===== BUTTON ===== */
-button {
-  width: 100%;
-  padding: 12px;
-  background: transparent;
-  border: 1px solid #00e5ff;
-  color: #00e5ff;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: rgba(0,229,255,.1);
-}
-
-/* ===== STATUS ===== */
-#status {
-  margin-top: 20px;
-  font-size: 13px;
-  height: 20px;
-}
-
-/* ===== CLASSIFIED LABEL ===== */
-.classified {
-  position: fixed;
-  bottom: 15px;
-  right: 20px;
-  font-size: 11px;
-  color: red;
-  letter-spacing: 2px;
-}
+button:hover{background:rgba(0,229,255,.15);}
+#msg{margin-top:20px;color:red;}
 </style>
 </head>
-
 <body>
 
-<div class="panel">
-  <h1>EXECUTIVE ACCESS TERMINAL</h1>
-  <div class="sub">AUTHORIZED PERSONNEL ONLY</div>
-
-  <input type="password" id="password" placeholder="Presidential Access Code">
-  <button onclick="login()">AUTHENTICATE</button>
-
-  <div id="status"></div>
+<div class="box">
+  <h1>SAISIR LE CODE NUCLÉAIRE</h1>
+  <input type="password" id="code" placeholder="••••••••">
+  <br>
+  <button onclick="check()">VALIDER</button>
+  <div id="msg"></div>
 </div>
 
-<div class="classified">CLASSIFIED</div>
-
 <script>
-function login() {
-  const pwd = document.getElementById("password").value;
-  const status = document.getElementById("status");
-
-  if (pwd === "7303") {
-    status.style.color = "#4cff9f";
-    status.innerText = "ACCESS GRANTED — EXECUTIVE AUTHORITY CONFIRMED";
-
-    setTimeout(() => {
-      status.innerText = "Loading Government Interface…";
-    }, 1200);
-
-    // Étape suivante plus tard
-    window.location.href = "dashboard.html";
-  } else {
-    status.style.color = "red";
-    status.innerText = "ACCESS DENIED";
+function check(){
+  if(document.getElementById("code").value==="NUCLEAR-ACCESS"){
+    window.location.href="command.html";
+  }else{
+    document.getElementById("msg").innerText="ACCÈS REFUSÉ";
   }
 }
 </script>
