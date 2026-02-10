@@ -18,7 +18,10 @@ body{
   align-items:center;
   padding:0 30px;
 }
-.header h1{letter-spacing:3px;font-size:15px;}
+.header h1{
+  letter-spacing:3px;
+  font-size:15px;
+}
 .main{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -44,7 +47,9 @@ button{
   color:#00e5ff;
   cursor:pointer;
 }
-button:hover{background:rgba(0,229,255,.15);}
+button:hover{
+  background:rgba(0,229,255,.15);
+}
 .serbere{
   border:2px solid red;
   color:red;
@@ -62,9 +67,9 @@ button:hover{background:rgba(0,229,255,.15);}
 
   <div class="panel">
     <h2>WORLD SURVEILLANCE</h2>
-    <button>GLOBAL MAP</button>
-    <button>SATELLITE FEEDS</button>
-    <button>REGIONAL CAMERAS</button>
+    <button onclick="openMap()">GLOBAL MAP</button>
+    <button onclick="openSat()">SATELLITE FEEDS</button>
+    <button onclick="openCams()">REGIONAL CAMERAS</button>
   </div>
 
   <div class="panel">
@@ -83,8 +88,17 @@ button:hover{background:rgba(0,229,255,.15);}
 </div>
 
 <script>
+function openMap(){
+  window.location.href = "global-map.html";
+}
+function openSat(){
+  window.location.href = "satellite.html";
+}
+function openCams(){
+  window.location.href = "cams.html";
+}
 function goSERBERE(){
-  window.location.href="serbere.html";
+  window.location.href = "serbere.html";
 }
 </script>
 
