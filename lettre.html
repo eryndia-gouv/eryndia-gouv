@@ -12,7 +12,7 @@ body{
   overflow:hidden;
 }
 
-/* ❄️ Portes glacées */
+/* ❄️ Porte glacée */
 .door{
   position:fixed;
   top:0;
@@ -23,8 +23,10 @@ body{
   z-index:10;
   transition:transform 2s ease;
 }
+
 .left{ left:0; border-right:2px solid white; }
 .right{ right:0; border-left:2px solid white; }
+
 .open-left{ transform:translateX(-100%); }
 .open-right{ transform:translateX(100%); }
 
@@ -42,12 +44,16 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
+  cursor:pointer;
   opacity:0;
   transition:opacity 1.5s ease;
 }
-.envelope.show{ opacity:1; }
 
-/* 🔴 Sceau */
+.envelope.show{
+  opacity:1;
+}
+
+/* 🔴 Sceau présidentiel */
 .seal{
   width:100px;
   height:100px;
@@ -64,19 +70,6 @@ body{
     inset 0 0 15px rgba(0,0,0,0.8),
     0 0 20px rgba(0,0,0,0.6);
   border:4px solid #550000;
-  cursor:pointer;
-  transition:transform .3s ease;
-}
-
-.seal.crack{
-  animation:breakSeal .6s forwards;
-}
-
-@keyframes breakSeal{
-  0%{ transform:scale(1) rotate(0deg); }
-  30%{ transform:scale(1.1) rotate(-5deg); }
-  60%{ transform:scale(1.1) rotate(5deg); }
-  100%{ transform:scale(0) rotate(20deg); opacity:0; }
 }
 
 .footer{
@@ -103,6 +96,7 @@ body{
   border-radius:4px;
   transition:transform 1.2s ease;
 }
+
 .signature{
   margin-top:40px;
   text-align:right;
@@ -113,13 +107,13 @@ body{
 
 <body>
 
-<!-- ❄️ Portes -->
+<!-- ❄️ Portes glacées -->
 <div class="door left"></div>
 <div class="door right"></div>
 
 <!-- ✉️ Enveloppe -->
-<div class="envelope">
-  <div class="seal" onclick="breakSeal(this)">
+<div class="envelope" onclick="openLetter()">
+  <div class="seal">
     REPUBLIQUE<br>
     DE VARENE<br>
     — OFFICIEL —
@@ -131,8 +125,19 @@ body{
 <div class="letter" id="letterContent">
   <h1>Ma Maelys 💙</h1>
 
-  <p>Aujourd’hui ça fait trois mois…</p>
-  <!-- (Tu peux remettre tout ton texte ici complet) -->
+  <p>Aujourd’hui ça fait trois mois. Trois mois que ma vie a changé sans même que je m’en rende compte au début. Trois mois que tu es entrée dans mon monde… et que tu l’as illuminé.</p>
+
+  <p>Je me souviens encore du jour où je t’ai envoyé ce message sur TikTok. Honnêtement, je pensais que tu n’allais jamais me répondre. C’était juste un message lancé comme ça, sans trop y croire… et pourtant, c’est devenu la plus belle décision que j’ai prise. Si je pouvais revenir en arrière, je renverrais ce message mille fois.</p>
+
+  <p>En trois mois, tu as fait pour moi plus que certaines personnes en des années. Tu m’as aidé moralement comme personne ne l’a fait. Quand ça n’allait pas, tu étais là. Quand je doutais, tu me rassurais. Quand je me sentais vide, tu me redonnais de la force. Tu as été mon soutien, mon refuge, ma paix.</p>
+
+  <p>Je sais que je ne te montre pas assez à quel point je t’aime. Je ne te dis pas assez merci. Je ne te fais peut-être pas toujours ressentir l’importance que tu as dans ma vie… mais crois-moi, dans mon cœur, c’est immense. Mille mercis ne suffiraient pas pour tout ce que tu m’apportes.</p>
+
+  <p>Tu es une femme incroyable, Maelys. Ton cœur, ta douceur, ta patience… Tout chez toi est précieux. Tu mérites le meilleur, et je prie pour être à la hauteur de ce que tu es pour moi.</p>
+
+  <p>Ces trois mois ne sont que le début. Inshaa’Allah on tiendra jusqu’à notre nikkah, Amin. Je veux avancer avec toi, grandir avec toi, construire avec toi.</p>
+
+  <p>Je t’aime plus que je ne le montre, plus que je ne le dis, et encore plus que tu ne l’imagines.</p>
 
   <div class="signature">
     Pour toujours,<br>
@@ -140,12 +145,8 @@ body{
   </div>
 </div>
 
-<!-- 🔊 Son craquement -->
-<audio id="crackSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-wood-crack-1104.mp3" type="audio/mpeg">
-</audio>
-
 <script>
+/* ❄️ Animation ouverture château */
 window.onload = function(){
   setTimeout(()=>{
     document.querySelector(".left").classList.add("open-left");
@@ -156,15 +157,10 @@ window.onload = function(){
   },800);
 };
 
-function breakSeal(seal){
-  document.getElementById("crackSound").play();
-  seal.classList.add("crack");
-
-  setTimeout(()=>{
-    document.querySelector(".envelope").style.display="none";
-    document.getElementById("letterContent").style.transform =
-      "translate(-50%,-50%) scale(1)";
-  },600);
+function openLetter(){
+  document.querySelector(".envelope").style.display="none";
+  document.getElementById("letterContent").style.transform =
+    "translate(-50%,-50%) scale(1)";
 }
 </script>
 
