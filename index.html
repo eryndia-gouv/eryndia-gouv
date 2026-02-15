@@ -2,68 +2,105 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SECURE NUCLEAR ACCESS</title>
+<title>Pour Maelys 💙</title>
+
 <style>
 body{
   margin:0;
-  background:radial-gradient(circle,#06192a,#000);
-  font-family:Segoe UI,Arial,sans-serif;
-  color:#cfefff;
-  height:100vh;
+  overflow:hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  color:white;
   display:flex;
-  align-items:center;
   justify-content:center;
-}
-.box{
-  border:1px solid #1f4d66;
-  padding:50px;
-  background:rgba(5,15,25,.95);
-  box-shadow:0 0 80px rgba(0,229,255,.25);
+  align-items:center;
+  height:100vh;
   text-align:center;
 }
+
+/* ❄️ neige */
+.snowflake{
+  position: fixed;
+  top: -10px;
+  color: white;
+  font-size: 10px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+.container{
+  background: rgba(255,255,255,0.08);
+  padding:40px;
+  border-radius:20px;
+  backdrop-filter: blur(10px);
+  box-shadow:0 0 30px rgba(255,255,255,0.3);
+}
+
 h1{
-  letter-spacing:3px;
-  font-size:18px;
-  margin-bottom:30px;
+  font-size:28px;
+  margin-bottom:20px;
 }
+
 input{
-  width:280px;
-  padding:14px;
-  background:black;
-  border:1px solid #00e5ff;
-  color:#00e5ff;
-  font-size:16px;
+  padding:12px;
+  font-size:18px;
+  border-radius:10px;
+  border:none;
   text-align:center;
+  margin-top:10px;
 }
+
 button{
-  margin-top:25px;
-  padding:12px 30px;
-  background:transparent;
-  border:1px solid #00e5ff;
-  color:#00e5ff;
+  margin-top:15px;
+  padding:10px 25px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
   cursor:pointer;
+  background:#ffffff;
+  color:#203a43;
+  font-weight:bold;
 }
-button:hover{background:rgba(0,229,255,.15);}
-#msg{margin-top:20px;color:red;}
+
+button:hover{
+  background:#dff6ff;
+}
 </style>
 </head>
+
 <body>
 
-<div class="box">
-  <h1>SAISIR LE CODE NUCLÉAIRE</h1>
-  <input type="password" id="code" placeholder="••••••••">
+<div class="container">
+  <h1>💙 Maelys 💙<br><br>Entre le code secret ✨</h1>
+  <input type="password" id="code" placeholder="Code magique">
   <br>
-  <button onclick="check()">VALIDER</button>
-  <div id="msg"></div>
+  <button onclick="checkCode()">Entrer</button>
 </div>
 
 <script>
-function check(){
-  if(document.getElementById("code").value==="7303"){
-    window.location.href="command.html";
-  }else{
-    document.getElementById("msg").innerText="ACCÈS REFUSÉ";
+function checkCode(){
+  if(document.getElementById("code").value === "7303"){
+    window.location.href = "surprise.html";
+  } else {
+    alert("Ce n'est pas le bon code princesse ✨");
   }
+}
+
+/* Génération neige */
+for(let i=0;i<80;i++){
+  let snow = document.createElement("div");
+  snow.className = "snowflake";
+  snow.innerHTML = "❄";
+  snow.style.left = Math.random()*100 + "vw";
+  snow.style.animationDuration = (Math.random()*3+2) + "s";
+  snow.style.opacity = Math.random();
+  snow.style.fontSize = (Math.random()*10+10) + "px";
+  document.body.appendChild(snow);
 }
 </script>
 
