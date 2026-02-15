@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Lettre Officielle</title>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  background:linear-gradient(to bottom,#0c1b2a,#1b3c5a);
+  font-family:'Georgia', serif;
+}
+
+/* ✈️ avions */
+.jet{
+  position:absolute;
+  font-size:18px;
+  animation: fly 8s linear infinite;
+}
+
+@keyframes fly{
+  from{ transform:translateX(-10vw); }
+  to{ transform:translateX(110vw); }
+}
+
+/* 📩 enveloppe */
+.envelope{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:400px;
+  height:260px;
+  background:#f4ecd8;
+  border-radius:5px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  transition:all 1s ease;
+}
+
+.seal{
+  width:70px;
+  height:70px;
+  background:#8b0000;
+  border-radius:50%;
+  position:absolute;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-weight:bold;
+  font-size:14px;
+  box-shadow:0 0 15px rgba(0,0,0,0.6);
+}
+
+/* 📜 lettre */
+.letter{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:500px;
+  background:#fffdf5;
+  padding:40px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+  border-radius:5px;
+  transition:transform 1s ease;
+}
+
+.letter h1{
+  text-align:center;
+}
+
+.signature{
+  margin-top:40px;
+  text-align:right;
+  font-style:italic;
+}
+
+.footer{
+  position:absolute;
+  bottom:10px;
+  left:15px;
+  font-size:12px;
+  font-weight:bold;
+  color:#333;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✈️ Avions -->
+<div class="jet" style="top:15%; animation-delay:0s;">✈️</div>
+<div class="jet" style="top:30%; animation-delay:2s;">✈️</div>
+<div class="jet" style="top:50%; animation-delay:4s;">✈️</div>
+
+<!-- 📩 Enveloppe -->
+<div class="envelope" onclick="openLetter()">
+  <div class="seal">SCELLÉ</div>
+  <div class="footer">REPUBLIQUE DE VARENE</div>
+</div>
+
+<!-- 📜 Lettre -->
+<div class="letter" id="letterContent">
+  <h1>Maelys 💙</h1>
+  <p>
+  Comme un message venu d’un autre royaume,  
+  cette lettre traverse les cieux comme un Alpha Jet 🇫🇷  
+  pour te rappeler que tu es unique.
+  </p>
+  <p>
+  Sous les étoiles comme dans Aladin 🌙  
+  et dans la magie glacée de la Reine des Neiges ❄️  
+  je veux écrire notre histoire.
+  </p>
+  <p class="signature">
+  Pour toujours 💙
+  </p>
+</div>
+
+<script>
+function openLetter(){
+  document.querySelector(".envelope").style.transform =
+    "translate(-50%,-50%) scale(0)";
+  document.getElementById("letterContent").style.transform =
+    "translate(-50%,-50%) scale(1)";
+}
+</script>
+
+</body>
+</html>
