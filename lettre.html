@@ -7,78 +7,41 @@
 <style>
 body{
   margin:0;
-  overflow:hidden;
   background:linear-gradient(to bottom,#0c1b2a,#1b3c5a);
   font-family:'Georgia', serif;
+  overflow:hidden;
 }
 
-/* ✈️ avions */
-.jet{
-  position:absolute;
-  font-size:18px;
-  animation: fly 8s linear infinite;
-}
-
-@keyframes fly{
-  from{ transform:translateX(-10vw); }
-  to{ transform:translateX(110vw); }
-}
-
-/* 📩 enveloppe */
+/* 📩 Enveloppe */
 .envelope{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:400px;
-  height:260px;
+  width:420px;
+  height:270px;
   background:#f4ecd8;
-  border-radius:5px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  border-radius:4px;
+  box-shadow:0 15px 50px rgba(0,0,0,0.7);
   display:flex;
   justify-content:center;
   align-items:center;
   cursor:pointer;
-  transition:all 1s ease;
+  transition:transform 1s ease, opacity 1s ease;
 }
 
 .seal{
-  width:70px;
-  height:70px;
+  width:80px;
+  height:80px;
   background:#8b0000;
   border-radius:50%;
-  position:absolute;
   display:flex;
   justify-content:center;
   align-items:center;
   color:white;
   font-weight:bold;
   font-size:14px;
-  box-shadow:0 0 15px rgba(0,0,0,0.6);
-}
-
-/* 📜 lettre */
-.letter{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  width:500px;
-  background:#fffdf5;
-  padding:40px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.7);
-  border-radius:5px;
-  transition:transform 1s ease;
-}
-
-.letter h1{
-  text-align:center;
-}
-
-.signature{
-  margin-top:40px;
-  text-align:right;
-  font-style:italic;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
 }
 
 .footer{
@@ -89,17 +52,39 @@ body{
   font-weight:bold;
   color:#333;
 }
+
+/* 📜 Lettre */
+.letter{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:650px;
+  max-height:85vh;
+  overflow:auto;
+  background:#fffdf5;
+  padding:50px;
+  box-shadow:0 20px 70px rgba(0,0,0,0.8);
+  border-radius:4px;
+  transition:transform 1s ease;
+}
+
+.letter h1{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.signature{
+  margin-top:40px;
+  text-align:right;
+  font-style:italic;
+}
 </style>
 </head>
 
 <body>
 
-<!-- ✈️ Avions -->
-<div class="jet" style="top:15%; animation-delay:0s;">✈️</div>
-<div class="jet" style="top:30%; animation-delay:2s;">✈️</div>
-<div class="jet" style="top:50%; animation-delay:4s;">✈️</div>
-
-<!-- 📩 Enveloppe -->
+<!-- ✉️ Enveloppe -->
 <div class="envelope" onclick="openLetter()">
   <div class="seal">SCELLÉ</div>
   <div class="footer">REPUBLIQUE DE VARENE</div>
@@ -107,28 +92,44 @@ body{
 
 <!-- 📜 Lettre -->
 <div class="letter" id="letterContent">
-  <h1>Maelys 💙</h1>
-  <p>
-  Comme un message venu d’un autre royaume,  
-  cette lettre traverse les cieux comme un Alpha Jet 🇫🇷  
-  pour te rappeler que tu es unique.
-  </p>
-  <p>
-  Sous les étoiles comme dans Aladin 🌙  
-  et dans la magie glacée de la Reine des Neiges ❄️  
-  je veux écrire notre histoire.
-  </p>
-  <p class="signature">
-  Pour toujours 💙
-  </p>
+  <h1>Ma Maelys 💙</h1>
+
+  <p>Aujourd’hui ça fait trois mois. Trois mois que ma vie a changé sans même que je m’en rende compte au début. Trois mois que tu es entrée dans mon monde… et que tu l’as illuminé.</p>
+
+  <p>Je me souviens encore du jour où je t’ai envoyé ce message sur TikTok. Honnêtement, je pensais que tu n’allais jamais me répondre. C’était juste un message lancé comme ça, sans trop y croire… et pourtant, c’est devenu la plus belle décision que j’ai prise. Si je pouvais revenir en arrière, je renverrais ce message mille fois.</p>
+
+  <p>En trois mois, tu as fait pour moi plus que certaines personnes en des années. Tu m’as aidé moralement comme personne ne l’a fait. Quand ça n’allait pas, tu étais là. Quand je doutais, tu me rassurais. Quand je me sentais vide, tu me redonnais de la force. Tu as été mon soutien, mon refuge, ma paix.</p>
+
+  <p>Je sais que je ne te montre pas assez à quel point je t’aime. Je ne te dis pas assez merci. Je ne te fais peut-être pas toujours ressentir l’importance que tu as dans ma vie… mais crois-moi, dans mon cœur, c’est immense. Mille mercis ne suffiraient pas pour tout ce que tu m’apportes.</p>
+
+  <p>Tu es une femme incroyable, Maelys. Ton cœur, ta douceur, ta patience… Tout chez toi est précieux. Tu mérites le meilleur, et je prie pour être à la hauteur de ce que tu es pour moi.</p>
+
+  <p>Ces trois mois ne sont que le début. Inshaa’Allah on tiendra jusqu’à notre nikkah, Amin. Je veux avancer avec toi, grandir avec toi, construire avec toi. Je veux que dans quelques années on repense à ce message TikTok en souriant, en se disant que c’était le début de notre histoire.</p>
+
+  <p>Merci d’être entrée dans ma vie. Merci de ne pas avoir ignoré ce message. Merci d’être toi. Merci de m’aimer.</p>
+
+  <p>Je t’aime plus que je ne le montre, plus que je ne le dis, et encore plus que tu ne l’imagines.</p>
+
+  <div class="signature">
+    Pour toujours,<br>
+    Mustafa 💙
+  </div>
 </div>
 
 <script>
 function openLetter(){
   document.querySelector(".envelope").style.transform =
     "translate(-50%,-50%) scale(0)";
+  document.querySelector(".envelope").style.opacity = "0";
+
   document.getElementById("letterContent").style.transform =
     "translate(-50%,-50%) scale(1)";
+}
+</script>
+
+</body>
+</html>
+
 }
 </script>
 
